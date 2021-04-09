@@ -3,15 +3,17 @@
 
 use std::env;
 
-fn parse_cli_args() -> Vec<String> {
-    env::args().collect()
+fn main() {
+    let args: Vec<String> = env::args().collect();
+
+    let (query, filename) = parse_cli_args(&args);
+
+    println!("Searching for '{}' in {}...", query, filename);
 }
 
-fn main() {
-    let args = parse_cli_args();
-
+fn parse_cli_args(args: &[String]) -> (&str, &str) {
     let query = &args[1];
     let filename = &args[2];
 
-    println!("Searching for '{}' in {}...", query, filename);
+    (query, filename)
 }
