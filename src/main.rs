@@ -3,6 +3,7 @@
 
 use std::env;
 use std::process;
+use std::fs;
 
 static NUM_CLI_ARGS: usize = 3;
 
@@ -47,4 +48,13 @@ fn main() {
     });
 
     println!("Searching for '{}' in {}...", config.query, config.filename);
+
+    run(config)
+}
+
+fn run(config: Config) {
+    let contents = fs::read_to_string(config.filename)
+        .expect("Error while reading input file");
+
+    println!("File contents:\n{}", contents);
 }
